@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Confirm, Loader } from 'semantic-ui-react';
 
 export async function getStaticProps({ params }) {
-	const res = await fetch('/api/notes/' + params.id);
+	const res = await fetch('http://localhost:3000/api/notes/' + params.id);
 	const {data} = await res.json();
 
 	return {
@@ -14,7 +14,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch('/api/notes');
+    const res = await fetch('http://localhost:3000/api/notes');
 	const {data} = await res.json();
     const paths = data.map(note=>{
         return {
@@ -41,7 +41,7 @@ const Note = ({note}) => {
 
         console.log(noteId);
         try {
-            const deleted = await fetch(`/api/notes/${noteId}`,{
+            const deleted = await fetch(`http://localhost:3000/api/notes/${noteId}`,{
                 method: 'DELETE'
             });
             router.push('/');

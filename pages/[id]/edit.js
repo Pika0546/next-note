@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react';
 import { Button, Form, Loader } from 'semantic-ui-react';
 
 export async function getStaticProps({ params }) {
-	const res = await fetch('/api/notes/' + params.id);
+	const res = await fetch('http://localhost:3000/api/notes/' + params.id);
 	const {data} = await res.json();
 
 	return {
@@ -16,7 +16,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch('/api/notes');
+    const res = await fetch('http://localhost:3000/api/notes');
 	const {data} = await res.json();
     const paths = data.map(note=>{
         return {
@@ -39,7 +39,7 @@ const Edit = ({note}) => {
 
     const updateNote = async () =>{
         try {
-            const res = await fetch(`/api/notes/${note._id}`,{
+            const res = await fetch(`http://localhost:3000/api/notes/${note._id}`,{
                 method: 'PUT',
                 headers: {
                     "Accept" : "application/json",
